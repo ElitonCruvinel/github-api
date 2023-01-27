@@ -3,6 +3,7 @@ import './styles.css';
 import ResultCard from 'components/ResultCard';
 import { useState } from 'react';
 import axios from 'axios';
+import CardLoader from './CardLoader';
 
 type FormData = {
   profileName: string;
@@ -18,6 +19,7 @@ type GithubProfile = {
 
 const GithubSearch = () => {
   const [githubProfile, setGithubProfile] = useState<GithubProfile>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     profileName: '',
@@ -33,6 +35,7 @@ const GithubSearch = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setIsLoading(true);
     axios
     .get(`https://api.github.com/users/${formData.profileName}`)
       .then((response) => {
@@ -42,6 +45,9 @@ const GithubSearch = () => {
       .catch((error) => {
         setGithubProfile(undefined);
         console.log(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -66,7 +72,8 @@ const GithubSearch = () => {
         </form>
       </div>
       <div className="info-container">
-        {githubProfile && (
+        {isLoading ? <CardLoader/> : (
+        githubProfile && (
           <div className="details-container">
             <div className="image-container">
               <img src={githubProfile?.avatar_url} alt=""></img>
@@ -91,7 +98,7 @@ const GithubSearch = () => {
               />
             </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );

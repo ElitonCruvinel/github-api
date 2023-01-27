@@ -5,7 +5,7 @@
 .search-container {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px 15px;
   background-color: #e6f7ff;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -84,6 +84,19 @@
     padding: 20px;
   }
 
+  .search-container {
+    padding: 40px 30px;
+  }
+
+  .form-container h1 {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  .search-input {
+    width: 350px;
+  }
+
   .details-container {
     flex-direction: row;
     padding: 10px;
@@ -92,11 +105,15 @@
 
 @media (min-width: 992px) {
   .search-container {
+    padding: 50px 30px;
     margin-bottom: 45px;
   }
 
   .github-search-container {
     padding: 50px;
   }
-}
 
+  .form-container h1 {
+    font-size: 22px;
+  }
+}
